@@ -1,4 +1,4 @@
 # Calculator-World
 
 
-World of Calcualtors, were you can any kind of calculators
+World of Calculators, were you can find any kind of calculator
