@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import PageLayout from './PageLayout';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.png" sizes="any" />
       </Head>
       <PageLayout/>
+      <SpeedInsights/>
     </>
   );
 }
