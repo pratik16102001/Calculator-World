@@ -17,8 +17,6 @@ export default function PercentageDiffrence(){
     number2: "",
     answer: "--"
   });
-  const [error, setErrors] = useState(false);
-  const [helperText, setHelperText] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -34,18 +32,12 @@ export default function PercentageDiffrence(){
       number2: "",
       answer: "--"
     });
-    setErrors(false);
-    setHelperText("");
   };
 
   const handleSubmit = () => {
     if(formValues.number1.trim() === "" || formValues.number2.trim() === ""){
-      setErrors(true);
-      setHelperText("Incorrect");
+      return false;
     }else{
-      setErrors(false);
-      setHelperText("");
-
       // Calculator Logic
       const number1 = parseInt(formValues.number1);
       const number2 = parseInt(formValues.number2);
@@ -70,25 +62,21 @@ export default function PercentageDiffrence(){
               <Grid size={4}>
                 <TextField
                   fullWidth
-                  error={error}
                   label="Number 1"
                   name="number1"
                   variant="outlined"
                   value={formValues.number1}
                   onChange={handleChange}
-                  helperText={helperText}
                 />
               </Grid>
               <Grid size={4}>
                 <TextField
                   fullWidth
-                  error={error}
                   label="Number 2"
                   name="number2"
                   variant="outlined"
                   value={formValues.number2}
                   onChange={handleChange}
-                  helperText={helperText}
                 />
               </Grid>
               <Grid size={4}>

@@ -19,8 +19,6 @@ export default function SimplePercentage(){
     number: "",
     result: "0"
   });
-  const [error, setErrors] = useState(false);
-  const [helperText, setHelperText] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -36,18 +34,12 @@ export default function SimplePercentage(){
       number: "",
       result: "0"
     });
-    setErrors(false);
-    setHelperText("");
   };
 
   const handleSubmit = () => {
     if(formValues.percentage.trim() === "" || formValues.number.trim() === ""){
-      setErrors(true);
-      setHelperText("Incorrect");
+      return false
     }else{
-      setErrors(false);
-      setHelperText("");
-      
       // Logic For Calculator
       const number = parseFloat(formValues.number);
       const percentage = parseFloat(formValues.percentage);
@@ -69,13 +61,11 @@ export default function SimplePercentage(){
               <Grid size={4}>
                 <TextField
                   fullWidth
-                  error={error}
                   label="Percentage (%)"
                   name="percentage"
                   value={formValues.percentage}
                   onChange={handleChange}
                   variant="outlined"
-                  helperText={helperText}
                   slotProps={{
                     input: {
                       startAdornment: (
@@ -90,13 +80,11 @@ export default function SimplePercentage(){
               <Grid size={4}>
                 <TextField
                   fullWidth
-                  error={error}
                   label="Number"
                   value={formValues.number}
                   onChange={handleChange}
                   name="number"
                   variant="outlined"
-                  helperText={helperText}
                 />
               </Grid>
               <Grid size={4}>

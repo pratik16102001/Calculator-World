@@ -17,9 +17,6 @@ export default function WeightUnit(){
   const [targetUnit, setTargetUnit] = useState("");
   const [result, setResult] = useState("");
 
-  const [error, setErrors] = useState(false);
-  const [helperText, setHelperText] = useState("");
-
   const weightUnits: Record<string, number> = {
     nanogram: 0.000000001,
     microgram: 0.000001,
@@ -35,19 +32,13 @@ export default function WeightUnit(){
     setInputValue("");
     setSourceUnit("");
     setTargetUnit("");
-    setErrors(false);
-    setHelperText("");
     setResult("");
   }
 
   const handleSubmit = () => {
     if(inputValue.trim() === "" || sourceUnit.trim() === "" || targetUnit === ""){
-      setErrors(true);
-      setHelperText("Incorrect");
+      return false;
     }else{
-      setErrors(false);
-      setHelperText("");
-
       const convertedValue = (Number(inputValue) * weightUnits[sourceUnit]) / weightUnits[targetUnit];
       setResult(JSON.stringify(convertedValue))
     }
@@ -69,8 +60,6 @@ export default function WeightUnit(){
                 fullWidth
                 value={inputValue}
                 sx={{ flex: 1 }}
-                error={error}
-                helperText={helperText}
                 onChange={(e) => setInputValue(e.target.value)}
               />
               <TextField
@@ -80,8 +69,6 @@ export default function WeightUnit(){
                 value={sourceUnit}  
                 sx={{ flex: 1 }}
                 onChange={(e) => setSourceUnit(e.target.value)}
-                error={error}
-                helperText={helperText}
               >
                 <MenuItem value="nanogram">NanoGram</MenuItem>
                 <MenuItem value="microgram">MicroGram</MenuItem>
@@ -99,8 +86,6 @@ export default function WeightUnit(){
                 value={targetUnit}  
                 sx={{ flex: 1 }}
                 onChange={(e) => setTargetUnit(e.target.value)}
-                error={error}
-                helperText={helperText}
               >
                 <MenuItem value="nanogram">NanoGram</MenuItem>
                 <MenuItem value="microgram">MicroGram</MenuItem>
@@ -111,7 +96,7 @@ export default function WeightUnit(){
                 <MenuItem value="megatonne">MegaTonne</MenuItem>
                 <MenuItem value="gigatonne">GigaTonne</MenuItem>
               </TextField>
-              <Box sx={{display:"flex", flexDirection:"column", gap:"inherit"}}>
+              <Box className="flex-button">
                 <Button variant="contained" color="primary" sx={{ flex: 1 }} onClick={handleSubmit}>Convert</Button>
                 <Button variant="outlined" color="primary" sx={{ flex: 1 }} onClick={handleClear}>Clear</Button>
               </Box>

@@ -18,18 +18,12 @@ export default function SimpleFraction() {
   const [operation, setOperation] = useState("+");
   const [result, setResult] = useState("");
 
-  const [error, setErrors] = useState(false);
-  const [helperText, setHelperText] = useState("");
-
   const handleClear = () => {
     setNumerator1("");
     setDenominator1("");
     setNumerator2("");
     setDenominator2("");
     setResult("");
-
-    setErrors(false);
-    setHelperText("");
   };
 
   const handleSubmit = () => {
@@ -39,8 +33,6 @@ export default function SimpleFraction() {
       const numeratorNumber2 = Number(numerator2);
       const denominatorNumber1 = Number(denominator1);
       const denominatorNumber2 = Number(denominator2);
-
-      console.log(operation)
 
       let res;
       switch (operation){
@@ -59,12 +51,8 @@ export default function SimpleFraction() {
         default:
           res = "";
       }
-      console.log(res);
       setResult(res);
 
-    }else{
-      setErrors(true);
-      setHelperText("Incorrect");
     }
   }
 
@@ -75,8 +63,6 @@ export default function SimpleFraction() {
         <Grid container spacing={2} display="flex" flexDirection="column">
           <Grid>
             <TextField
-              error={error}
-              helperText={helperText}
               label="Numerator 1"
               value={numerator1}
               onChange={(e) => setNumerator1(e.target.value)}
@@ -86,8 +72,6 @@ export default function SimpleFraction() {
           </Grid>
           <Grid>
             <TextField
-              error={error}
-              helperText={helperText}
               label="Denominator 1"
               value={denominator1}
               onChange={(e) => setDenominator1(e.target.value)}
@@ -109,8 +93,6 @@ export default function SimpleFraction() {
         <Grid container spacing={2} display="flex" flexDirection="column">
           <Grid>
             <TextField
-              error={error}
-              helperText={helperText}
               label="Numerator 2"
               value={numerator2}
               onChange={(e) => setNumerator2(e.target.value)}
@@ -120,8 +102,6 @@ export default function SimpleFraction() {
           </Grid>
           <Grid>
             <TextField
-              error={error}
-              helperText={helperText}
               label="Denominator 2"
               value={denominator2}
               onChange={(e) => setDenominator2(e.target.value)}

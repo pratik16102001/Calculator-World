@@ -20,9 +20,6 @@ export default function TemperatureUnit(){
   const [targetUnit, setTargetUnit] = useState("");
   const [result, setResult] = useState("");
 
-  const [error, setErrors] = useState(false);
-  const [helperText, setHelperText] = useState("");
-
   const handleCalculation = (sourceUnit: string, targetUnit: string) => {
 
     if(sourceUnit == celsius && targetUnit == farenhit){
@@ -44,19 +41,13 @@ export default function TemperatureUnit(){
     setInputValue("");
     setSourceUnit("");
     setTargetUnit("");
-    setErrors(false);
-    setHelperText("");
     setResult("");
   }
 
   const handleSubmit = () => {
     if(inputValue.trim() === "" || sourceUnit.trim() === "" || targetUnit === ""){
-      setErrors(true);
-      setHelperText("Incorrect");
+      return false;
     }else{
-      setErrors(false);
-      setHelperText("");
-
       const finalConvertedValue = handleCalculation(sourceUnit, targetUnit);
       setResult(JSON.stringify(finalConvertedValue))
     }
@@ -78,8 +69,6 @@ export default function TemperatureUnit(){
                 fullWidth
                 value={inputValue}
                 sx={{ flex: 1 }}
-                error={error}
-                helperText={helperText}
                 onChange={(e) => setInputValue(e.target.value)}
               />
               <TextField
@@ -89,8 +78,6 @@ export default function TemperatureUnit(){
                 value={sourceUnit}
                 sx={{ flex: 1 }}
                 onChange={(e) => setSourceUnit(e.target.value)}
-                error={error}
-                helperText={helperText}
               >
                 <MenuItem value="feranhit">Farenhits</MenuItem>
                 <MenuItem value="celsius">Celsius</MenuItem>
@@ -103,14 +90,12 @@ export default function TemperatureUnit(){
                 value={targetUnit}  
                 sx={{ flex: 1 }}
                 onChange={(e) => setTargetUnit(e.target.value)}
-                error={error}
-                helperText={helperText}
               >
                 <MenuItem value="feranhit">Farenhits</MenuItem>
                 <MenuItem value="celsius">Celsius</MenuItem>
                 <MenuItem value="kelvin">Kelvin</MenuItem>
               </TextField>
-              <Box sx={{display:"flex", flexDirection:"column", gap:"inherit"}}>
+              <Box className="flex-button">
                 <Button variant="contained" color="primary" sx={{ flex: 1 }} onClick={handleSubmit}>Convert</Button>
                 <Button variant="outlined" color="primary" sx={{ flex: 1 }} onClick={handleClear}>Clear</Button>
               </Box>

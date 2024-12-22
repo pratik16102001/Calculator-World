@@ -15,9 +15,6 @@ export default function TimeUnit() {
   const [targetUnit, setTargetUnit] = useState("");
   const [result, setResult] = useState("");
 
-  const [error, setErrors] = useState(false);
-  const [helperText, setHelperText] = useState("");
-
   const timeConversionRates: Record<string, number> = {
     seconds: 1,
     minutes: 60,
@@ -29,19 +26,13 @@ export default function TimeUnit() {
     setInputValue("");
     setSourceUnit("");
     setTargetUnit("");
-    setErrors(false);
-    setHelperText("");
     setResult("");
   }
 
   const handleSubmit = () => {
     if(inputValue.trim() === "" || sourceUnit.trim() === "" || targetUnit === ""){
-      setErrors(true);
-      setHelperText("Incorrect");
+      return false;
     }else{
-      setErrors(false);
-      setHelperText("");
-
       const valueInSeconds = Number(inputValue) * timeConversionRates[sourceUnit];
       const convertedValue = valueInSeconds / timeConversionRates[targetUnit];
       setResult(convertedValue.toFixed(2));
@@ -64,8 +55,6 @@ export default function TimeUnit() {
                 fullWidth
                 value={inputValue}
                 sx={{ flex: 1 }}
-                error={error}
-                helperText={helperText}
                 onChange={(e) => setInputValue(e.target.value)}
               />
               <TextField
@@ -75,8 +64,6 @@ export default function TimeUnit() {
                 value={sourceUnit}
                 sx={{ flex: 1 }}
                 onChange={(e) => setSourceUnit(e.target.value)}
-                error={error}
-                helperText={helperText}
               >
                 <MenuItem value="seconds">Seconds</MenuItem>
                 <MenuItem value="minutes">Minutes</MenuItem>
@@ -90,8 +77,6 @@ export default function TimeUnit() {
                 value={targetUnit}  
                 sx={{ flex: 1 }}
                 onChange={(e) => setTargetUnit(e.target.value)}
-                error={error}
-                helperText={helperText}
               >
                 <MenuItem value="seconds">Seconds</MenuItem>
                 <MenuItem value="minutes">Minutes</MenuItem>

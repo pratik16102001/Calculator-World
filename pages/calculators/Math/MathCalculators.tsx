@@ -38,6 +38,12 @@ export default function MathCalculators(){
               onClick={() => router.push("/calculators/Math/Fraction/Fraction")}
             />
           </ListItem>
+          <ListItem className="list-item">
+            <ListItemText 
+              primary="Geometry Calculators"
+              onClick={() => router.push("/calculators/Math/Geomatry/Geomatry")}
+            />
+          </ListItem>
         </List>
       </CardContent>
     </Card>
