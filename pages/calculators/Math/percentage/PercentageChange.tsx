@@ -24,8 +24,6 @@ export default function PercentageChange(){
     percentage: "",
     output: "0"
   });
-  const [error, setErrors] = useState(false);
-  const [helperText, setHelperText] = useState("");
   const [selectValue, setSelectValue] = React.useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,19 +44,13 @@ export default function PercentageChange(){
       percentage: "",
       output: "0"
     });
-    setErrors(false);
-    setHelperText("");
     setSelectValue("");
   };
 
   const handleSubmit = () => {
     if(formValues.baseNumber.trim() === "" || formValues.percentage.trim() === ""){  
-      setErrors(true);
-      setHelperText("Incorrect");
+      return false;
     }else{
-      setErrors(false);
-      setHelperText("");
-
       //Calculator Logic
       const baseNumber = parseInt(formValues.baseNumber);
       const percentage = parseInt(formValues.percentage);
@@ -80,13 +72,11 @@ export default function PercentageChange(){
                 <Grid size={{xs:12, sm:3}}>
                   <TextField
                     fullWidth
-                    error={error}
                     label="Base Number"
                     name="baseNumber"
                     variant="outlined"
                     value={formValues.baseNumber}
                     onChange={handleChange}
-                    helperText={helperText}
                   />
                 </Grid>
                 <Grid size={{xs:12,sm:3}}>
@@ -101,13 +91,11 @@ export default function PercentageChange(){
                 <Grid size={{xs:12,sm:3}}>
                   <TextField
                     fullWidth
-                    error={error}
                     label="Percentage (%)"
                     name="percentage"
                     variant="outlined"
                     value={formValues.percentage}
                     onChange={handleChange}
-                    helperText={helperText}
                     slotProps={{
                       input: {
                         startAdornment: (

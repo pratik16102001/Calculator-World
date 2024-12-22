@@ -17,9 +17,6 @@ export default function LengthUnit(){
   const [targetUnit, setTargetUnit] = useState("");
   const [result, setResult] = useState("");
 
-  const [error, setErrors] = useState(false);
-  const [helperText, setHelperText] = useState("");
-
   const lengthUnits: Record<string, number> = {
     kilometer: 1000,
     hectometer: 100,
@@ -34,19 +31,13 @@ export default function LengthUnit(){
     setInputValue("");
     setSourceUnit("");
     setTargetUnit("");
-    setErrors(false);
-    setHelperText("");
     setResult("");
   }
 
   const handleSubmit = () => {
     if(inputValue.trim() === "" || sourceUnit.trim() === "" || targetUnit === ""){
-      setErrors(true);
-      setHelperText("Incorrect");
+      return false
     }else{
-      setErrors(false);
-      setHelperText("");
-
       const convertedValue = (Number(inputValue) * lengthUnits[sourceUnit]) / lengthUnits[targetUnit];
       setResult(convertedValue.toFixed(2))
     }
@@ -68,8 +59,6 @@ export default function LengthUnit(){
                 fullWidth
                 value={inputValue}
                 sx={{ flex: 1 }}
-                error={error}
-                helperText={helperText}
                 onChange={(e) => setInputValue(e.target.value)}
               />
               <TextField
@@ -79,8 +68,6 @@ export default function LengthUnit(){
                 value={sourceUnit}
                 sx={{ flex: 1 }}
                 onChange={(e) => setSourceUnit(e.target.value)}
-                error={error}
-                helperText={helperText}
               >
                 <MenuItem value="millimeter">Milimeter</MenuItem>
                 <MenuItem value="centimeter">Centimeter</MenuItem>
@@ -97,8 +84,6 @@ export default function LengthUnit(){
                 value={targetUnit}  
                 sx={{ flex: 1 }}
                 onChange={(e) => setTargetUnit(e.target.value)}
-                error={error}
-                helperText={helperText}
               >
                 <MenuItem value="millimeter">Milimeter</MenuItem>
                 <MenuItem value="centimeter">Centimeter</MenuItem>

@@ -97,3 +97,32 @@
   text-align: center;
   vertical-align: middle;
 }
+
+.flex-button{
+  display: flex;
+  flex-direction: column;
+  gap: inherit;
+}
+
+.card-content{
+  margin: auto;
+  margin-top: 4;
+  width: 48%;
+  box-shadow: 3;
+}
+
+.header-title{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  font-weight: bold;
+}
+
+.box-content{
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  justify-content: space-between;
+  align-items: center;
+}
